@@ -1,7 +1,9 @@
 # LVD-Surv
 
 > **Latent Variational Distribution Survival Modeling for Reliability Prediction**
+> 
 > 面向可靠性预测的潜变量变分分布生存建模框架
+> 
 > 当前版本：v1.3.0
 
 ## 项目简介
