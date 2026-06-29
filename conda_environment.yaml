@@ -1,0 +1,21 @@
+name: quality_time_series
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - scikit-learn
+  - pandas
+  - matplotlib
+  - pywavelets
+  - pytorch
+  - numpy
+  - shap
+  - seaborn
+  - xgboost
+  - hmmlearn
+  - ruptures
+  - scipy
+  - cython
+  - dcor
+  - pyyaml

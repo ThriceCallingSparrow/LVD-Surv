@@ -1,0 +1,39 @@
+# 公开配置结构说明。内部产物路径不属于用户配置。
+required_sections:
+  - project
+  - data
+  - features
+  - lifetime
+  - model
+  - training
+  - inference
+  - explanation
+project:
+  output_dir: path
+data:
+  dataset: [FD001, FD002, FD003, FD004]
+  root: path
+  train_file: path_or_filename
+  test_file: path_or_filename
+  rul_file: path_or_filename
+features:
+  cache_policy: [auto, force, readonly, off]
+  default_training_feature_mode: [raw, residual, hybrid]
+lifetime:
+  cache_policy: [auto, force, readonly, off]
+  max_components: positive_integer
+inference:
+  plot_mode: [current, history, snapshot]
+runtime:
+  verbosity: [quiet, normal, verbose, debug]
+removed_options:
+  - data.fd
+  - data.output_dir
+  - features.decision_path
+  - features.bundle_path
+  - features.transformer_path
+  - features.manifest_path
+  - features.analysis_output_dir
+  - lifetime_prior.prior_json
+  - lifetime_prior.prior_pkl
+  - lifetime_prior.manifest_path

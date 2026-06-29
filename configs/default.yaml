@@ -1,0 +1,79 @@
+# LVD-Surv 正式配置。内部 JSON/PKL/manifest 路径由系统自动管理。
+project:
+  # 当前数据集全部输出的根目录。
+  output_dir: outputs/FD004
+
+data:
+  # C-MAPSS 子数据集，可选 FD001、FD002、FD003、FD004。
+  dataset: FD004
+  # 数据文件目录；文件名字段相对于该目录解析。
+  root: datastream/CMAPSSData
+  train_file: train_FD004.txt
+  test_file: test_FD004.txt
+  rul_file: RUL_FD004.txt
+  # 是否在训练中使用已知工况标签。
+  known_condition: true
+  condition_columns: [setting_1, setting_2, setting_3]
+  # null 表示由正式特征分析决定；不会自动退回全部传感器。
+  selected_sensor_columns: null
+  window_size: 50
+  stride: 1
+  max_horizon: 150
+  train_split: 0.85
+  random_seed: 42
+
+features:
+  enabled: true
+  cache_policy: auto       # auto/force/readonly/off
+  default_training_feature_mode: raw  # raw/residual/hybrid
+  residual_condition_columns: [setting_1, setting_2, setting_3]
+  include_condition_dummies: true
+  residual_suffix: _resid
+  full_validation: true
+  enable_deconfounding: false
+
+lifetime:
+  enabled: true
+  cache_policy: auto       # auto/force/readonly/off
+  max_components: 4
+  use_in_inference: true
+  blend_weight: 0.25
+
+model:
+  encoder_type: tcn
+  hidden_dim: 96
+  latent_dim: 16
+  num_modes: 6
+  num_tcn_layers: 4
+  tcn_kernel_size: 3
+  transformer_layers: 2
+  transformer_heads: 4
+  dropout: 0.1
+
+training:
+  batch_size: 128
+  epochs: 60
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  beta_kl_final: 0.01
+  kl_anneal_epochs: 20
+  lambda_mono: 0.02
+  lambda_cond: 0.2
+  lambda_orth: 0.01
+  gradient_clip_norm: 5.0
+  early_stop_patience: 12
+  num_workers: 0
+
+inference:
+  mc_samples: 20
+  plot_mode: current       # current/history/snapshot
+  plot_max_curves_per_device: 8
+
+explanation:
+  permutation_repeats: 3
+  shap_sample_size: 128
+
+runtime:
+  verbosity: normal        # quiet/normal/verbose/debug
+  save_reports: false
+  save_plots: false
